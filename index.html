@@ -1,202 +1,200 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
-        name="description"
-        content="Interactive Kanban Task Board"
-    >
+      name="description"
+      content="A modern interactive Kanban task board for organizing and managing projects."
+    />
+    <meta name="theme-color" content="#111827" />
+
     <title>Kanban Task Board</title>
 
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
-
+  <body>
     <header class="topbar">
-        <div class="topbar-left">
-            <div class="logo">KANBAN</div>
-            <span class="board-name">My Task Board</span>
-        </div>
+      <div class="topbar-left">
+        <a href="#" class="logo" aria-label="Kanban home"> KANBAN </a>
 
-        <div class="topbar-right">
-            <button class="add-list-btn" id="openListModal">
-                + Add List
-            </button>
+        <div class="board-info">
+          <span class="board-name">My Task Board</span>
+          <span class="board-status">
+            <span class="status-dot"></span>
+            Active
+          </span>
         </div>
+      </div>
+
+      <div class="topbar-right">
+        <button type="button" class="add-list-btn" id="openListModal">
+          <span aria-hidden="true">+</span>
+          Add List
+        </button>
+      </div>
     </header>
 
     <main class="board-container">
+      <section class="board-header">
+        <div class="board-intro">
+          <p class="board-label">PROJECT BOARD</p>
 
-        <div class="board-header">
-            <div>
-                <p class="board-label">PROJECT BOARD</p>
-                <h1>My Tasks</h1>
-                <p class="board-description">
-                    Organize your work, move tasks between stages,
-                    and keep everything under control.
-                </p>
-            </div>
+          <h1>My Tasks</h1>
 
-            <div class="task-counter">
-                <span id="totalTasks">0</span>
-                <small>Total Tasks</small>
-            </div>
+          <p class="board-description">
+            Organize your work, manage your tasks, and move everything smoothly
+            through your workflow.
+          </p>
         </div>
 
-        <section
-            class="kanban-board"
-            id="kanbanBoard"
-            aria-label="Kanban task board"
-        ></section>
+        <div class="task-counter" aria-label="Total number of tasks">
+          <span id="totalTasks">0</span>
+          <small>Total Tasks</small>
+        </div>
+      </section>
 
+      <section
+        class="kanban-board"
+        id="kanbanBoard"
+        aria-label="Kanban task board"
+      ></section>
     </main>
 
-
     <div
-        class="modal-overlay"
-        id="taskModal"
-        aria-hidden="true"
+      class="modal-overlay"
+      id="taskModal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="taskModalTitle"
     >
-        <div class="modal">
+      <div class="modal">
+        <div class="modal-header">
+          <div>
+            <p class="modal-label">TASK</p>
 
-            <div class="modal-header">
-                <div>
-                    <p class="modal-label">TASK</p>
-                    <h2 id="taskModalTitle">Add New Task</h2>
-                </div>
+            <h2 id="taskModalTitle">Add New Task</h2>
+          </div>
 
-                <button
-                    class="close-modal"
-                    data-close-modal="taskModal"
-                    aria-label="Close"
-                >
-                    &times;
-                </button>
-            </div>
-
-            <form id="taskForm">
-
-                <input
-                    type="hidden"
-                    id="taskId"
-                >
-
-                <input
-                    type="hidden"
-                    id="taskListId"
-                >
-
-                <div class="form-group">
-                    <label for="taskTitle">Task Title</label>
-
-                    <input
-                        type="text"
-                        id="taskTitle"
-                        placeholder="Enter task title"
-                        maxlength="100"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="taskDescription">Description</label>
-
-                    <textarea
-                        id="taskDescription"
-                        placeholder="Describe your task..."
-                        maxlength="500"
-                        rows="5"
-                    ></textarea>
-                </div>
-
-                <div class="modal-actions">
-                    <button
-                        type="button"
-                        class="cancel-btn"
-                        data-close-modal="taskModal"
-                    >
-                        Cancel
-                    </button>
-
-                    <button
-                        type="submit"
-                        class="save-btn"
-                    >
-                        Save Task
-                    </button>
-                </div>
-
-            </form>
+          <button
+            type="button"
+            class="close-modal"
+            data-close-modal="taskModal"
+            aria-label="Close task dialog"
+          >
+            &times;
+          </button>
         </div>
+
+        <form id="taskForm">
+          <input type="hidden" id="taskId" />
+
+          <input type="hidden" id="taskListId" />
+
+          <div class="form-group">
+            <label for="taskTitle"> Task Title </label>
+
+            <input
+              type="text"
+              id="taskTitle"
+              placeholder="What needs to be done?"
+              maxlength="100"
+              autocomplete="off"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="taskDescription"> Description </label>
+
+            <textarea
+              id="taskDescription"
+              placeholder="Add more details about this task..."
+              maxlength="500"
+              rows="5"
+            ></textarea>
+
+            <small class="input-hint">
+              Keep it clear and easy to understand.
+            </small>
+          </div>
+
+          <div class="modal-actions">
+            <button
+              type="button"
+              class="cancel-btn"
+              data-close-modal="taskModal"
+            >
+              Cancel
+            </button>
+
+            <button type="submit" class="save-btn">Save Task</button>
+          </div>
+        </form>
+      </div>
     </div>
 
-
     <div
-        class="modal-overlay"
-        id="listModal"
-        aria-hidden="true"
+      class="modal-overlay"
+      id="listModal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="listModalTitle"
     >
-        <div class="modal">
+      <div class="modal">
+        <div class="modal-header">
+          <div>
+            <p class="modal-label">LIST</p>
 
-            <div class="modal-header">
-                <div>
-                    <p class="modal-label">LIST</p>
-                    <h2 id="listModalTitle">Add New List</h2>
-                </div>
+            <h2 id="listModalTitle">Add New List</h2>
+          </div>
 
-                <button
-                    class="close-modal"
-                    data-close-modal="listModal"
-                    aria-label="Close"
-                >
-                    &times;
-                </button>
-            </div>
-
-            <form id="listForm">
-
-                <input
-                    type="hidden"
-                    id="editListId"
-                >
-
-                <div class="form-group">
-                    <label for="listName">List Name</label>
-
-                    <input
-                        type="text"
-                        id="listName"
-                        placeholder="e.g. In Progress"
-                        maxlength="50"
-                        required
-                    >
-                </div>
-
-                <div class="modal-actions">
-                    <button
-                        type="button"
-                        class="cancel-btn"
-                        data-close-modal="listModal"
-                    >
-                        Cancel
-                    </button>
-
-                    <button
-                        type="submit"
-                        class="save-btn"
-                    >
-                        Save List
-                    </button>
-                </div>
-
-            </form>
+          <button
+            type="button"
+            class="close-modal"
+            data-close-modal="listModal"
+            aria-label="Close list dialog"
+          >
+            &times;
+          </button>
         </div>
-    </div>
 
+        <form id="listForm">
+          <input type="hidden" id="editListId" />
+
+          <div class="form-group">
+            <label for="listName"> List Name </label>
+
+            <input
+              type="text"
+              id="listName"
+              placeholder="e.g. In Progress"
+              maxlength="50"
+              autocomplete="off"
+              required
+            />
+
+            <small class="input-hint"> Give your list a clear name. </small>
+          </div>
+
+          <div class="modal-actions">
+            <button
+              type="button"
+              class="cancel-btn"
+              data-close-modal="listModal"
+            >
+              Cancel
+            </button>
+
+            <button type="submit" class="save-btn">Save List</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <script src="script.js"></script>
-
-</body>
+  </body>
 </html>
