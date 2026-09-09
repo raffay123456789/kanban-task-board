@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="Interactive Kanban Task Board"
+    >
+    <title>Kanban Task Board</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="topbar-left">
+            <div class="logo">KANBAN</div>
+            <span class="board-name">My Task Board</span>
+        </div>
+
+        <div class="topbar-right">
+            <button class="add-list-btn" id="openListModal">
+                + Add List
+            </button>
+        </div>
+    </header>
+
+    <main class="board-container">
+
+        <div class="board-header">
+            <div>
+                <p class="board-label">PROJECT BOARD</p>
+                <h1>My Tasks</h1>
+                <p class="board-description">
+                    Organize your work, move tasks between stages,
+                    and keep everything under control.
+                </p>
+            </div>
+
+            <div class="task-counter">
+                <span id="totalTasks">0</span>
+                <small>Total Tasks</small>
+            </div>
+        </div>
+
+        <section
+            class="kanban-board"
+            id="kanbanBoard"
+            aria-label="Kanban task board"
+        ></section>
+
+    </main>
+
+
+    <div
+        class="modal-overlay"
+        id="taskModal"
+        aria-hidden="true"
+    >
+        <div class="modal">
+
+            <div class="modal-header">
+                <div>
+                    <p class="modal-label">TASK</p>
+                    <h2 id="taskModalTitle">Add New Task</h2>
+                </div>
+
+                <button
+                    class="close-modal"
+                    data-close-modal="taskModal"
+                    aria-label="Close"
+                >
+                    &times;
+                </button>
+            </div>
+
+            <form id="taskForm">
+
+                <input
+                    type="hidden"
+                    id="taskId"
+                >
+
+                <input
+                    type="hidden"
+                    id="taskListId"
+                >
+
+                <div class="form-group">
+                    <label for="taskTitle">Task Title</label>
+
+                    <input
+                        type="text"
+                        id="taskTitle"
+                        placeholder="Enter task title"
+                        maxlength="100"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="taskDescription">Description</label>
+
+                    <textarea
+                        id="taskDescription"
+                        placeholder="Describe your task..."
+                        maxlength="500"
+                        rows="5"
+                    ></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button
+                        type="button"
+                        class="cancel-btn"
+                        data-close-modal="taskModal"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="save-btn"
+                    >
+                        Save Task
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+    <div
+        class="modal-overlay"
+        id="listModal"
+        aria-hidden="true"
+    >
+        <div class="modal">
+
+            <div class="modal-header">
+                <div>
+                    <p class="modal-label">LIST</p>
+                    <h2 id="listModalTitle">Add New List</h2>
+                </div>
+
+                <button
+                    class="close-modal"
+                    data-close-modal="listModal"
+                    aria-label="Close"
+                >
+                    &times;
+                </button>
+            </div>
+
+            <form id="listForm">
+
+                <input
+                    type="hidden"
+                    id="editListId"
+                >
+
+                <div class="form-group">
+                    <label for="listName">List Name</label>
+
+                    <input
+                        type="text"
+                        id="listName"
+                        placeholder="e.g. In Progress"
+                        maxlength="50"
+                        required
+                    >
+                </div>
+
+                <div class="modal-actions">
+                    <button
+                        type="button"
+                        class="cancel-btn"
+                        data-close-modal="listModal"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="save-btn"
+                    >
+                        Save List
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
